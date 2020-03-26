@@ -49,7 +49,19 @@ describe('server.js', () => {
 	});
 	//
 	describe('DELETE /prospects/:id', () => {
-		it.todo('should respond with a 200 OK');
-		it.todo('should respond with a json message');
+		it('should respond with a 200 OK', () => {
+			return request(server)
+				.delete('/prospects/3')
+				.then(res => {
+					expect(res.status).toBe(200);
+				});
+		});
+		it('should respond with a json message', () => {
+			return request(server)
+				.delete('/prospects/3')
+				.then(res => {
+					expect(res.body.message).toBe('successfully deleted prospect');
+				});
+		});
 	});
 });
