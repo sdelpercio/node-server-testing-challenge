@@ -9,7 +9,7 @@ describe('server.js', () => {
 			expect(response.status).toBe(200);
 		});
 		it('should should respond with an json array', () => {
-			request(server)
+			return request(server)
 				.get('/prospects')
 				.then(res => {
 					expect(res.type).toMatch(/json/i);
@@ -18,8 +18,34 @@ describe('server.js', () => {
 	});
 	//
 	describe('POST /prospects', () => {
-		it.todo('should respond with a 201 CREATED');
-		it.todo('should respond with a json message');
+		it('should respond with a 201 CREATED', () => {
+			return request(server)
+				.post('/prospects')
+				.send({
+					name: 'Jalen Reagor',
+					grade: 5.83,
+					position: 'WR',
+					strengths: 'Good punt returner',
+					weaknesses: 'Has had too many drops'
+				})
+				.then(res => {
+					expect(res.status).toBe(201);
+				});
+		});
+		it('should respond with a json message', () => {
+			return request(server)
+				.post('/prospects')
+				.send({
+					name: 'Jalen Reagor',
+					grade: 5.83,
+					position: 'WR',
+					strengths: 'Good punt returner',
+					weaknesses: 'Has had too many drops'
+				})
+				.then(res => {
+					expect(res.body.message);
+				});
+		});
 	});
 	//
 	describe('DELETE /prospects/:id', () => {
