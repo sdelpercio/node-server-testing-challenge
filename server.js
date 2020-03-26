@@ -5,7 +5,7 @@ const server = express();
 
 server.use(express.json());
 
-server.get('prospects', (req, res) => {
+server.get('/prospects', (req, res) => {
 	Prospect.getAll()
 		.then(prospects => {
 			res.status(200).json(prospects);
@@ -14,7 +14,7 @@ server.get('prospects', (req, res) => {
 			res.status(500).json({ error: 'issue getting prospects', err });
 		});
 });
-server.post('prospects', (req, res) => {
+server.post('/prospects', (req, res) => {
 	const newProspect = req.body;
 
 	Prospect.insert(newProspect)
@@ -25,7 +25,7 @@ server.post('prospects', (req, res) => {
 			res.status(500).json({ error: 'issue creating prospect', err });
 		});
 });
-server.delete('prospects/:id', (req, res) => {
+server.delete('/prospects/:id', (req, res) => {
 	const { id } = req.params;
 
 	Prospect.remove(id)
